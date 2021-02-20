@@ -7,6 +7,10 @@ custom:
   pythonRequirements:
     dockerizePip: non-linux
   dbConn: ${ssm:tweet-sentiment-redshift-conn}
+  twitterConsumerKey: ${ssm:twitter-consumer-key}
+  twitterConsumerSecret: ${ssm:twitter-consumer-secret}
+  twitterAccessToken: ${ssm:twitter-access-token}
+  twitterAccessSecret: ${ssm:twitter-access-token-secret}
 
 frameworkVersion: '2'
 
@@ -16,12 +20,18 @@ provider:
   region: eu-west-1
   timeout: 300
   environment:
-    DB_CONN: ${self.custom.dbConn}
+    DB_CONN: ${self:custom.dbConn}
+    TWITTER_CONSUMER_KEY: ${self:custom.twitterConsumerKey}
+    TWITTER_CONSUMER_SECRET: ${self:custom.twitterConsumerSecret}
+    TWITTER_ACCESS_TOKEN: ${self:custom.twitterAccessToken}
+    TWITTER_ACCESS_SECRET: ${self:custom.twitterAccessSecret}
   vpc:
     securityGroupIds:
       - sg-8a520bc3
     subnetIds:
       - subnet-2ed14674
+      - subnet-c373568b
+      - subnet-69713b0f
   iamRoleStatements:
     - Effect: Allow
       Action:
