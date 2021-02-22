@@ -41,7 +41,6 @@ def init_tables(engine):
 def main(event, context):
     data = getData('Macron', 5)
     cleaned_data = [cleanup(item) for item in data]
-
     engine = create_engine(DB_CONN)
     init_tables(engine)
     conn = engine.connect()

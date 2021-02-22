@@ -18,7 +18,7 @@ provider:
   name: aws
   runtime: python3.8
   region: eu-west-1
-  timeout: 300
+  timeout: 900
   environment:
     DB_CONN: ${self:custom.dbConn}
     TWITTER_CONSUMER_KEY: ${self:custom.twitterConsumerKey}
@@ -29,14 +29,15 @@ provider:
     securityGroupIds:
       - sg-8a520bc3
     subnetIds:
-      - subnet-2ed14674
-      - subnet-c373568b
-      - subnet-69713b0f
+      - subnet-0544233cb32321b29
+      - subnet-07822b9c9cf15b5f8
+      - subnet-0a6b8641af20c3163
   iamRoleStatements:
-    - Effect: Allow
-      Action:
-        - "ec2:CreateNetworkInterface"
+    - Effect: "Allow"
+      Action: 
+      - "ec2:CreateNetworkInterface"
       Resource: "*"
+      
 
 functions:
   etl:
